@@ -28,20 +28,45 @@ public class PlayerBase : MonoBehaviour
     void Update()
     {
         animator.SetBool("Running", movingX!=0);
-        if (Input.GetAxis("Horizontal") != 0)  // Рух по горизонталі з клавіатури
-            movingX = Input.GetAxis("Horizontal");
-        else movingX = 0;
-
-        rb.velocity = new Vector2(movingX * speed, rb.velocity.y); // Рух по горизонталі
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) // Стрибок
             Jump();
-        CheckGround();
+        CheckGround(); Flip();
     }
 
-    private void Jump()
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(movingX * speed, rb.velocity.y); // Рух по горизонталі
+    }
+
+    public void ButtonRight()
+    {
+        movingX = 1;
+    }
+    public void ButtonLeft()
+    {
+        movingX = -1;
+    }
+    public void ButtonUp()
+    {
+        movingX = 0;
+    }
+
+    public void Jump()
     {
         rb.AddForce(transform.up * jumpForce * 100);
+    }
+
+    private void Flip()
+    {
+        if (movingX > 0)
+        {
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (movingX < 0)
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     void CheckGround()
