@@ -5,14 +5,27 @@ using UnityEngine;
 public class PlayerBase : MonoBehaviour
 {
     [Header("Stats")]
+    [Header("Run")]
     public float speed;
-    public float jumpForce;
-    public bool isGrounded;
-    public bool lookRight;
-    private float movingX;
-    public bool moving;
+    public float smoothTime = 0.5f;
 
+    [Header("Jump")]
+    public float jumpForce;
+    public float jumpTime;
+    public float fallMultiplier;
+    public float jumpMultiplier;
+    private float movingX;
+    Vector2 vecGravity;
+
+    bool isJumping;
+    float jumpCounter;
+
+    public float hangTime = 0.1f;
+    private float hangCounter;
+
+    [Header("Ground")]
     public Transform groundCheck;
+    public LayerMask groundLayer;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -21,7 +34,7 @@ public class PlayerBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
+        vecGravity = new Vector2(0, -Physics2D.gravity.y);
     }
 
     // Update is called once per frame
@@ -29,14 +42,49 @@ public class PlayerBase : MonoBehaviour
     {
         animator.SetBool("Running", movingX!=0);
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) // Стрибок
-            Jump();
-        CheckGround(); Flip();
+        if (Input.GetKeyDown(KeyCode.Space))
+            JumpButtonDown();
+        if (Input.GetKeyUp(KeyCode.Space))
+            JumpButtonUp();
+
+        // Стрибок після платформи
+        if (isGrounded())
+        {
+            hangCounter = hangTime;
+        }
+        else
+        {
+            hangCounter -= Time.deltaTime;
+        }
+
+        // висота стрибка
+        if (rb.velocity.y>0 && isJumping)
+        {
+            jumpCounter += Time.deltaTime;
+            if (jumpCounter > jumpTime) isJumping = false;
+
+            float t = jumpCounter / jumpTime;
+            float currentJumpM = jumpMultiplier;
+
+            if (t > 0.5f) {
+                currentJumpM = jumpMultiplier * (1 - t);
+            }
+
+            rb.velocity += vecGravity * currentJumpM * Time.deltaTime;
+        }
+        //падіння
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity -= vecGravity*fallMultiplier*Time.deltaTime;
+        }
+
+        Flip();
+        animator.SetBool("isGrounded", isGrounded());
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(movingX * speed, rb.velocity.y); // Рух по горизонталі
+        Run();
     }
 
     public void ButtonRight()
@@ -51,10 +99,24 @@ public class PlayerBase : MonoBehaviour
     {
         movingX = 0;
     }
-
-    public void Jump()
+    private void Run()
     {
-        rb.AddForce(transform.up * jumpForce * 100);
+        float targetX = movingX * speed; // Цільове значення швидкості
+
+        rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, targetX, smoothTime), rb.velocity.y);
+    }
+
+    public void JumpButtonDown()
+    {
+        if (hangCounter<=0f) return;
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        isJumping = true;
+        jumpCounter = 0;
+    }
+
+    public void JumpButtonUp()
+    {
+        isJumping = false;
     }
 
     private void Flip()
@@ -69,10 +131,10 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-    void CheckGround()
+
+    bool isGrounded()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f);
-        isGrounded = colliders.Length > 1;
-        animator.SetBool("isGrounded", isGrounded);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, 0.2f, groundLayer);
+        return colliders.Length > 0;
     }
 }
