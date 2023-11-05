@@ -45,6 +45,7 @@ public class PlayerBase : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             JumpButtonDown();
         if (Input.GetKeyUp(KeyCode.Space))
+
             JumpButtonUp();
 
         // Стрибок після платформи

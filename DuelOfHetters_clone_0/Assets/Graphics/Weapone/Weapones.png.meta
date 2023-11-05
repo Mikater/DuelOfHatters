@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 95fe2b26d3704e44989aa37d166f946a
+guid: bffe95b4ba5c75f4eb421a33288ba13d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Elements_0
+      name: Weapones_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 246
-        width: 101
-        height: 101
+        x: 6
+        y: 219
+        width: 502
+        height: 159
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f48f658a7ff1a6f4eb5ad40cf1ec059a
-      internalID: -1644888435
+      spriteID: 316d2f5c628fb864ca35d238f10343af
+      internalID: -2045581598
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Elements_3
+      name: Weapones_1
       rect:
         serializedVersion: 2
-        x: 491
-        y: 146
-        width: 201
-        height: 201
+        x: 561
+        y: 308
+        width: 66
+        height: 56
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e6a55e15c5c5f74b80728dd034e84de
-      internalID: -1821104861
+      spriteID: 427287a2c379b8e4f8fc3d530fe7b13a
+      internalID: -1236650005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Elements_4
+      name: Weapones_2
       rect:
         serializedVersion: 2
-        x: 704
-        y: 146
-        width: 201
-        height: 201
+        x: 6
+        y: 54
+        width: 497
+        height: 165
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf577402986c35c4b84dec2020fda2dc
-      internalID: -1117060685
+      spriteID: 303f1c46224775c47a81e70345de471b
+      internalID: 939529466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Elements_5
+      name: Weapones_3
       rect:
         serializedVersion: 2
-        x: 916
-        y: 146
-        width: 201
-        height: 201
+        x: 523
+        y: 185
+        width: 64
+        height: 109
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa535458db65cca46a947763a0eba546
-      internalID: -1187682885
+      spriteID: b1ee49cd5097d904ab1810fbc1569628
+      internalID: 2043810964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Elements_8
+      name: Weapones_4
       rect:
         serializedVersion: 2
-        x: 2
-        y: 115
-        width: 97
-        height: 97
+        x: 614
+        y: 186
+        width: 26
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,29 +215,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45e321c2805e653409be6f54059aa0f4
-      internalID: -320270452
+      spriteID: c379a6cb70569b246aa5765d1d10ff65
+      internalID: -805648444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Elements_1
+      name: Weapones_5
       rect:
         serializedVersion: 2
-        x: 115
-        y: 0
-        width: 347
-        height: 347
+        x: 555
+        y: 103
+        width: 77
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 2, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26814299597c7874e849b1ed140bd158
-      internalID: 185744392
+      spriteID: c8ee508c75a6f1340839ff0294c8b201
+      internalID: 28287818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapones_6
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 57
+        width: 120
+        height: 39
+      alignment: 9
+      pivot: {x: 0.09073385, y: 0.39739248}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d06f86c3bffe0c4dac3a22b22937517
+      internalID: 731487832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapones_7
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 10
+        width: 122
+        height: 39
+      alignment: 9
+      pivot: {x: 0.08551576, y: 0.61193615}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09516e2cadb30e741973c2c0365f1394
+      internalID: 1731278996
       vertices: []
       indices: 
       edges: []
@@ -253,23 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      UI_Elements_0: -1644888435
-      UI_Elements_1: 185744392
-      UI_Elements_10: 1772436592
-      UI_Elements_11: -151839805
-      UI_Elements_12: -1928098675
-      UI_Elements_13: 272182373
-      UI_Elements_14: -501877011
-      UI_Elements_15: -2036892437
-      UI_Elements_16: 997361946
-      UI_Elements_2: -1184202237
-      UI_Elements_3: -1821104861
-      UI_Elements_4: -1117060685
-      UI_Elements_5: -1187682885
-      UI_Elements_6: 1973773986
-      UI_Elements_7: -1121968430
-      UI_Elements_8: -320270452
-      UI_Elements_9: -1017475395
+      Weapones_0: -2045581598
+      Weapones_1: -1236650005
+      Weapones_2: 939529466
+      Weapones_3: 2043810964
+      Weapones_4: -805648444
+      Weapones_5: 28287818
+      Weapones_6: 731487832
+      Weapones_7: 1731278996
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
