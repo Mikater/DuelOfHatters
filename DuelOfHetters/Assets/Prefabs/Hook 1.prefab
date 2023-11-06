@@ -202,7 +202,7 @@ DistanceJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 5
+  m_Distance: 8
   m_MaxDistanceOnly: 1
 --- !u!233 &-1965055343071077946
 HingeJoint2D:

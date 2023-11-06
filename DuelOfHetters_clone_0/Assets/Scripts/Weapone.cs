@@ -11,12 +11,16 @@ public class Weapone : MonoBehaviour
     public Transform shootPoint;
     [Header("Weapons")]
     public GameObject BullWeapone;
+    [Header("Hook Settings")]
     public GameObject HookWeapone;
-    public bool hookTypeWeapone = true;
-    public bool hookGraping = false;
-    public bool hookGoHome = true;
+    public bool hookTypeWeapone = true; // Тип зброї хук
+    public bool hookGraping = false; // хук вистрілив.
+    public bool hookGoHome = true; // зажим кнопки для повернення хука
     public float hookGoHomeSpeed = 0.2f;
-    GameObject hook;
+    public float hookMinDist = 1f;
+    public float hookMaxDist = 6f;
+    GameObject hook; // обєкт хук, для керування.
+    private DistanceJoint2D distInHookWeapone;
 
     [Header("Time")]
     public float timeToDoubleClick;
@@ -25,27 +29,27 @@ public class Weapone : MonoBehaviour
 
     void Start()
     {
-        
+        distInHookWeapone = GetComponent<DistanceJoint2D>();
     }
 
     void Update()
     {
         lastClickTime -= Time.deltaTime;
-        if (hookGoHome)
+        if (hookGoHome && distInHookWeapone.distance>=hookMinDist)
         {
-            hook.GetComponent<Hook1>().distance -= hookGoHomeSpeed;
+            distInHookWeapone.distance -= hookGoHomeSpeed;
+            hook.GetComponent<Hook1>().distance = distInHookWeapone.distance;
         }
     }
 
     public void OnFireButtonDown()
     {
-        if (lastClickTime > 0)
+        if (lastClickTime > 0) //Перевірка на даблклік
         {
             Debug.Log("Double Ckick");
             if (hookGraping)
             {
-                Destroy(hook);
-                hookGraping = false;
+                HookUnCatch();
             }
         }
         else
@@ -58,14 +62,61 @@ public class Weapone : MonoBehaviour
                 }
                 else
                 {
-                    hook = Instantiate(hookPrefab, shootPoint.position, shootPoint.rotation);
-                    DistanceJoint2D hookDist = hook.GetComponent<DistanceJoint2D>();
-                    hookDist.connectedBody = HookWeapone.GetComponent<Rigidbody2D>();
-                    hookDist.distance = 5f;
-                    hookGraping = true;
+                    HookShot();
                 }
             }
+            else
+            {
+                BulletShot();
+            }
             lastClickTime = timeToDoubleClick;
+        }
+    }
+
+    private void HookShot() // Вистріл хуком
+    {
+        hook = Instantiate(hookPrefab, shootPoint.position, shootPoint.rotation);
+        DistanceJoint2D hookDist = hook.GetComponent<DistanceJoint2D>();
+        hookDist.connectedBody = HookWeapone.GetComponent<Rigidbody2D>();
+        hookDist.distance = hookMaxDist;
+        distInHookWeapone.distance = hookMaxDist;
+        hookGraping = true;
+        distInHookWeapone.connectedBody = hook.GetComponent<Rigidbody2D>();
+        distInHookWeapone.enabled = true;
+        StartCoroutine(CheckHookCatch());
+    }
+    IEnumerator CheckHookCatch()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(hook.GetComponent<Hook1>().catchedObj == null)
+        {
+            HookUnCatch();
+        }
+    }
+    private void HookUnCatch() // Відчепити хук
+    {
+        Destroy(hook);
+        hookGraping = false;
+        distInHookWeapone.enabled = false;
+    }
+    private void BulletShot() // Вистріл кулею
+    {
+        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+    }
+    private void ChangeBulletType() // Зміна типу патрону
+    {
+        if (hookGraping) return;
+        if (hookTypeWeapone)
+        {
+            hookTypeWeapone = false;
+            HookWeapone.SetActive(false);
+            BullWeapone.SetActive(true);
+        }
+        else
+        {
+            hookTypeWeapone = true;
+            HookWeapone.SetActive(true);
+            BullWeapone.SetActive(false);
         }
     }
     public void OnFireButtonUp()
