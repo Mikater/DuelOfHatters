@@ -21,6 +21,7 @@ public class Weapone : MonoBehaviour
     public float hookMaxDist = 6f;
     GameObject hook; // обєкт хук, для керування.
     private DistanceJoint2D distInHookWeapone;
+    public GameObject dynamicLine;
 
     [Header("Time")]
     public float timeToDoubleClick;
@@ -83,6 +84,8 @@ public class Weapone : MonoBehaviour
         hookGraping = true;
         distInHookWeapone.connectedBody = hook.GetComponent<Rigidbody2D>();
         distInHookWeapone.enabled = true;
+        dynamicLine.GetComponent<DynamicLine>().object2 = hook.transform;
+        dynamicLine.SetActive(true);
         StartCoroutine(CheckHookCatch());
     }
     IEnumerator CheckHookCatch()
@@ -95,6 +98,7 @@ public class Weapone : MonoBehaviour
     }
     private void HookUnCatch() // Відчепити хук
     {
+        dynamicLine.SetActive(false);
         Destroy(hook);
         hookGraping = false;
         distInHookWeapone.enabled = false;
@@ -103,7 +107,7 @@ public class Weapone : MonoBehaviour
     {
         Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
     }
-    private void ChangeBulletType() // Зміна типу патрону
+    public void ChangeBulletType() // Зміна типу патрону
     {
         if (hookGraping) return;
         if (hookTypeWeapone)
