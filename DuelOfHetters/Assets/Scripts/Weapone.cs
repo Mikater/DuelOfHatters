@@ -85,7 +85,7 @@ public class Weapone : MonoBehaviour
         distInHookWeapone.connectedBody = hook.GetComponent<Rigidbody2D>();
         distInHookWeapone.enabled = true;
         dynamicLine.GetComponent<DynamicLine>().object2 = hook.transform;
-        dynamicLine.SetActive(true);
+        dynamicLine.GetComponent<LineRenderer>().enabled = true;
         StartCoroutine(CheckHookCatch());
     }
     IEnumerator CheckHookCatch()
@@ -98,7 +98,7 @@ public class Weapone : MonoBehaviour
     }
     private void HookUnCatch() // Відчепити хук
     {
-        dynamicLine.SetActive(false);
+        dynamicLine.GetComponent<LineRenderer>().enabled = false;
         Destroy(hook);
         hookGraping = false;
         distInHookWeapone.enabled = false;
