@@ -8,8 +8,7 @@ public class DynamicLine : MonoBehaviour
 
     void Start()
     {
-        lineRenderer.SetPosition(0, object1.position);
-        lineRenderer.SetPosition(1, object2.position);
+        lineRenderer.enabled = false;
     }
     void Update()
     {
