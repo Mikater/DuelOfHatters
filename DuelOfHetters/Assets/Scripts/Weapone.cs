@@ -22,6 +22,8 @@ public class Weapone : MonoBehaviour
     GameObject hook; // обєкт хук, для керування.
     private DistanceJoint2D distInHookWeapone;
     public GameObject dynamicLine;
+    public GameObject changeButton;
+    private Animator changeButonAnim;
 
     [Header("Time")]
     public float timeToDoubleClick;
@@ -31,6 +33,7 @@ public class Weapone : MonoBehaviour
     void Start()
     {
         distInHookWeapone = GetComponent<DistanceJoint2D>();
+        changeButonAnim = changeButton.GetComponent<Animator>();
     }
 
     void Update()
@@ -115,6 +118,7 @@ public class Weapone : MonoBehaviour
             hookTypeWeapone = false;
             HookWeapone.SetActive(false);
             BullWeapone.SetActive(true);
+            
         }
         else
         {
@@ -122,6 +126,7 @@ public class Weapone : MonoBehaviour
             HookWeapone.SetActive(true);
             BullWeapone.SetActive(false);
         }
+        changeButonAnim.SetBool("Hook", hookTypeWeapone);
     }
     public void OnFireButtonUp()
     {
