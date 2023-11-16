@@ -12,7 +12,10 @@ public class DynamicLine : MonoBehaviour
     }
     void Update()
     {
-        lineRenderer.SetPosition(0, object1.position);
-        lineRenderer.SetPosition(1, object2.position);
+        if (lineRenderer.enabled == true)
+        {
+            lineRenderer.SetPosition(0, object1.position);
+            lineRenderer.SetPosition(1, object2.position);
+        }
     }
 }
